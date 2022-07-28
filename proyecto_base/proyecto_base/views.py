@@ -10,3 +10,7 @@ def inicio(request):
 def login(request):
     template_name = 'login.html'
     return render(request, template_name)
+
+def noticias(request):
+    template_name = 'noticias.html'
+    return render(request, template_name)
