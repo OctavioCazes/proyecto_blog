@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = "usuarios.Usuario"
+
+LOGIN_REDIRECT_URL = '/inicio'
+
 
 # Application definition
 
@@ -37,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog'
+    'blog',
+    'usuarios'
 ]
 
 MIDDLEWARE = [
@@ -76,8 +81,12 @@ WSGI_APPLICATION = 'proyecto_base.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'blog2',
+        'USER' : 'root',
+        'PASSWORD': 'octavio',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 
