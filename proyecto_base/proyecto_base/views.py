@@ -1,6 +1,6 @@
 import re
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import login_required
 
 
 def inicio(request):
@@ -8,7 +8,7 @@ def inicio(request):
     return render(request, template_name, {})
 
 def login(request):
-    template_name = 'login.html'
+    template_name = 'accounts/login.html'
     return render(request, template_name)
 
 def noticias(request):
