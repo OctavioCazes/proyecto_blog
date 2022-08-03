@@ -77,7 +77,8 @@
   <header class="blog-header lh-1 py-3">
     <div class="row flex-nowrap justify-content-between align-items-center">
       <div class="col-4 pt-1">
-      <img src="https://institutobarranqueras.com/wp-content/uploads/2019/08/Logo-Curvas-hor-02-303x119.png" alt="" width="150">
+      <a href="{% url 'inicio'%}"><img src="https://institutobarranqueras.com/wp-content/uploads/2019/08/Logo-Curvas-hor-02-303x119.png" alt="" width="150">
+      </a>
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center">
         <a class="link-secondary" href="#" aria-label="Search">
@@ -90,13 +91,13 @@
 
   <div class="nav-scroller py-1 mb-2 text-bg-success">
     <nav class="nav d-flex justify-content-between fc-dark">
-      <a class="p-2 link-dark" href="{% url 'noticias'%}">Noticias</a>
-      <a class="p-2 link-dark" href="#">Quienes somos</a>
-      <a class="p-2 link-dark" href="#">Mision</a>
-      <a class="p-2 link-dark" href="#">Vision</a>
-      <a class="p-2 link-dark" href="#">Contacto</a>
-      <a class="p-2 link-dark" href="#">Eventos</a>
-      <a class="p-2 link-dark" href="#">Recursos para descargar</a>
+      <a class="p-2 link-light" href="{% url 'noticias'%}">Noticias</a>
+      <a class="p-2 link-light" href="{% url 'quienes'%}">Quienes somos</a>
+      <a class="p-2 link-light" href="{% url 'mision'%}">Misión</a>
+      <a class="p-2 link-light" href="{% url 'vision'%}">Vision</a>
+      <a class="p-2 link-light" href="{% url 'contacto'%}">Contacto</a>
+      <a class="p-2 link-light" href="{% url 'eventos'%}">Eventos</a>
+      <a class="p-2 link-light" href="{% url 'recursos'%}">Recursos para descargar</a>
     </nav>
   </div>
 </div>
