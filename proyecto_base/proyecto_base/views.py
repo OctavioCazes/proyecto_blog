@@ -1,6 +1,14 @@
+from email import message
 from re import template
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from usuarios.form_usuarios import UsuarioForm
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.contrib import messages
+
+
+
 
 from usuarios.models import Usuario
 
@@ -9,9 +17,32 @@ def inicio(request):
     template_name = 'inicio.html'
     return render(request, template_name, {})
 
-def login(request):
+def login(request): 
+    data = {
+        'form' : UsuarioForm
+    }
+    if request.method == 'POST':
+        password = request.POST.get("password", None)
+        usuario = request.POST.get("username", None)
+        user = authenticate(password,usuario)
+        auth_login(request,user, data)
+
     template_name = 'accounts/login.html'
-    return render(request, template_name)
+    return render(request, template_name, data)
+
+def registrarse(request):
+    data = {
+        'form' : UsuarioForm
+    }
+    if request.method == 'POST':
+        formulario = UsuarioForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username = formulario.cleaned_data["username"], password = formulario.cleaned_data["password"])
+            auth_login(request, user)
+            messages.success(request, "Te has registrado exitosamente")
+            return redirect('inicio')
+    return render(request, 'templates_usuarios/crear_usuario.html', data)
 
 def noticias(request):
     template_name = 'noticias.html'

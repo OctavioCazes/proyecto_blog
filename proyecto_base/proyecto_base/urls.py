@@ -24,6 +24,7 @@ urlpatterns = [
     path('', views.inicio, name='inicio'),
     path('account/login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path('cerrar-sesion', auth_views.logout_then_login, name="logout" ),
+    path('registrarse', views.registrarse, name='registrarse'),
     path('noticias/', views.noticias, name='noticias'),
     path('quienes/', views.quienes, name='quienes'),
     path('mision/', views.mision, name='mision'),
