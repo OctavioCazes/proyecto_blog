@@ -24,6 +24,12 @@ urlpatterns = [
     path('', views.inicio, name='inicio'),
     path('account/login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path('cerrar-sesion', auth_views.logout_then_login, name="logout" ),
-    path('noticias', views.noticias, name='noticias')
+    path('noticias/', views.noticias, name='noticias'),
+    path('quienes/', views.quienes, name='quienes'),
+    path('mision/', views.mision, name='mision'),
+    path('vision/', views.vision, name='vision'),
+    path('contacto/', views.contacto, name='contacto'),
+    path('eventos/', views.eventos, name='eventos'),
+    path('recursos/', views.recursos, name='recursos'),
 
 ]
