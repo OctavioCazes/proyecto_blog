@@ -3,7 +3,7 @@ from re import template
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from usuarios.form_usuarios import UsuarioForm
-from django.contrib.auth import authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login as auth_login
 from django.contrib import messages
 
@@ -17,7 +17,7 @@ def inicio(request):
     template_name = 'inicio.html'
     return render(request, template_name, {})
 
-def login(request): 
+def login(request, LoginRequiredMixin): 
     data = {
         'form' : UsuarioForm
     }
