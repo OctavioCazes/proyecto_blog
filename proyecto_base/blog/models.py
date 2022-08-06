@@ -13,7 +13,7 @@ class Categorias(models.Model):
 class Post(models.Model):
     #Clase dentro de otra clase,vamos a usar para buscar y mostrar los articulos en pantalla publicados
     class PostObjects(models.Manager):
-        def get_queryser(sefl):
+        def get_queryser(self):
             return super().get_queryset().filter(estado='published')
     
     options = (
@@ -43,6 +43,8 @@ class Post(models.Model):
     
     def _str_(self):
         return self.titulo_not 
+
+
 
 #comentarios como adorno?
 class Comentario(models.Model):
