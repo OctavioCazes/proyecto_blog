@@ -11,42 +11,17 @@
     </div>
   </div>
 
-
+{% for p in post %}
 <div class="card-group">
   <div class="card">
-    <img src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/480/public/media/image/2019/03/lenguajes_programacion_odiados_amados_2019.jpg?itok=N85E5HTT" class="card-img-top" alt="...">
+    <img src="{{MEDIA_URL}}{{p.imagen.url}}" width="100" alt="" srcset="">
     <div class="card-body">
-      <h5 class="card-title">Noticia 1</h5>
-      <p class="card-text">Copete Noticia 1</p>
+      <h5 class="card-title">{{ p.titulo_not}}</h5>
+      <p class="card-text">{{ p.excerpt}}</p>
     </div>
     <div class="card-footer">
-      <small class="text-muted">Fecha 1</small>
+      <small class="text-muted">{{ p.published }}</small>
     </div>
   </div>
-  <div class="card">
-    <img src="https://i.blogs.es/b2d165/10481690626_8c28740067_k/500_333.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Noticia 2</h5>
-      <p class="card-text">Copete Noticia 2</p>
-    </div>
-    <div class="card-footer">
-      <small class="text-muted">Fecha 2</small>
-    </div>
-  </div>
-  <div class="card">
-    <img src="http://www.eltiempo.com/files/image_640_428/uploads/2018/05/14/5afa377ebd7af.jpeg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Noticia 3</h5>
-      <p class="card-text">Copete Noticia 3</p>
-    </div>
-    <div class="card-footer">
-      <small class="text-muted">Fecha 3</small>
-    </div>
-  </div>
-</div>
-
-
-
-</main>
-
+  {% endfor %}
 {% endblock contenido %}

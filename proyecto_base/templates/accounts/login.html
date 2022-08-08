@@ -80,7 +80,8 @@
   <body class="text-center">
     
 <main class="form-signin w-25 m-auto">
-  <form method="POST">{% csrf_token %}
+  <form method="POST">
+	{% csrf_token %}
     
     <img src="https://institutobarranqueras.com/wp-content/uploads/2019/08/Logo-Curvas-hor-02-303x119.png">
     <h1 class="h3 mb-3 fw-bold ">Iniciar Sesión</h1>
@@ -99,7 +100,7 @@
         <input type="checkbox" value="remember-me"> Recordarme
       </label>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit" id="submit">Iniciar</button>
+    <input class="w-100 btn btn-lg btn-primary" type="submit" value="Iniciar"/>
   </form>
   	<a href="{% url 'inicio' %}"><button class="w-100 btn btn-lg btn-primary">Volver</button></a>
 	<a href="{% url 'registrarse' %}"><button class="w-100 btn btn-lg btn-primary">Registrarse</button></a>

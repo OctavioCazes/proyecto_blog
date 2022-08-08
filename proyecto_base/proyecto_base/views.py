@@ -3,14 +3,12 @@ from re import template
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from usuarios.form_usuarios import UsuarioForm
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as login2
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login as auth_login
 from django.contrib import messages
-
-
-
-
+from django.contrib.auth import authenticate
 from usuarios.models import Usuario
+from blog.models import Post
 
 
 def inicio(request):
@@ -18,20 +16,13 @@ def inicio(request):
     return render(request, template_name, {})
 
 def login(request): 
-    data = {
-        'form' : Usuario
-    }
-    if request.method == 'POST':
-        formulario = Usuario(request.POST)
-        if formulario.is_valid():
-            username = formulario.cleaned_data["username"]
-            password = formulario.cleaned_data["password"]
-            user =  username, password
-            login2(request, user)
-            messages.success(request, "Te has logeado exitosamente")
-            return redirect('inicio')
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        auth_login(request, user, backend=None)
     template_name = 'accounts/login.html'
-    return render(request, template_name, data)
+    return render(request, template_name)
 
 def registrarse(request):
     data = {
@@ -40,16 +31,18 @@ def registrarse(request):
     if request.method == 'POST':
         formulario = UsuarioForm(data=request.POST)
         if formulario.is_valid():
-            formulario.save()
-            user = authenticate(username = formulario.cleaned_data["username"], password = formulario.cleaned_data["password"])
-            login2(request, user)
-            messages.success(request, "Te has registrado exitosamente")
+            user = formulario.save()
+            auth_login(request, user)
+            messages.success(request,"Te has registrado exitosamente")
             return redirect('inicio')
     return render(request, 'templates_usuarios/crear_usuario.html', data)
 
 def noticias(request):
+    post ={
+        'post':Post.postobjects.all()
+    } 
     template_name = 'noticias.html'
-    return render(request, template_name)
+    return render(request, template_name, post)
 
 def quienes(request):
     template_name = 'quienes.html'

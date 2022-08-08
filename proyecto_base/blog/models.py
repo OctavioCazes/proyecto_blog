@@ -7,13 +7,13 @@ from django.utils import timezone
 class Categorias(models.Model):
     name = models.CharField(max_length=100)
 
-    def _srt_(self):
+    def __str__(self):
         return self.name
 
 class Post(models.Model):
     #Clase dentro de otra clase,vamos a usar para buscar y mostrar los articulos en pantalla publicados
     class PostObjects(models.Manager):
-        def get_queryser(sefl):
+        def get_queryser(self):
             return super().get_queryset().filter(estado='published')
     
     options = (
@@ -41,8 +41,10 @@ class Post(models.Model):
     class Meta():
         ordering = ('-published',)
     
-    def _str_(self):
+    def __str__(self):
         return self.titulo_not 
+
+
 
 #comentarios como adorno?
 class Comentario(models.Model):
