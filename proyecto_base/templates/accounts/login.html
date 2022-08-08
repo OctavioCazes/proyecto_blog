@@ -86,8 +86,8 @@
     <h1 class="h3 mb-3 fw-bold ">Iniciar Sesión</h1>
 
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="nombre@ejemplo.com" name="username">
-      <label for="floatingInput">Dirección de correo electrónico</label>
+      <input type="text" class="form-control" id="floatingInput" placeholder="Nombre de Usuario" name="username">
+      <label for="floatingInput">Nombre de Usuario</label>
     </div>
     <div class="form-floating">
       <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña" name="password">
@@ -99,7 +99,7 @@
         <input type="checkbox" value="remember-me"> Recordarme
       </label>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar</button>
+    <button class="w-100 btn btn-lg btn-primary" type="submit" id="submit">Iniciar</button>
   </form>
   	<a href="{% url 'inicio' %}"><button class="w-100 btn btn-lg btn-primary">Volver</button></a>
 	<a href="{% url 'registrarse' %}"><button class="w-100 btn btn-lg btn-primary">Registrarse</button></a>

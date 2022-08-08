@@ -1,10 +1,10 @@
-from email import message
+
 from re import template
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from usuarios.form_usuarios import UsuarioForm
 from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_login
+from django.contrib.auth import login as login2
 from django.contrib import messages
 
 
@@ -19,14 +19,17 @@ def inicio(request):
 
 def login(request): 
     data = {
-        'form' : UsuarioForm
+        'form' : Usuario
     }
     if request.method == 'POST':
-        password = request.POST.get("password", None)
-        usuario = request.POST.get("username", None)
-        user = authenticate(password,usuario)
-        auth_login(request,user, data)
-
+        formulario = Usuario(request.POST)
+        if formulario.is_valid():
+            username = formulario.cleaned_data["username"]
+            password = formulario.cleaned_data["password"]
+            user =  username, password
+            login2(request, user)
+            messages.success(request, "Te has logeado exitosamente")
+            return redirect('inicio')
     template_name = 'accounts/login.html'
     return render(request, template_name, data)
 
@@ -39,7 +42,7 @@ def registrarse(request):
         if formulario.is_valid():
             formulario.save()
             user = authenticate(username = formulario.cleaned_data["username"], password = formulario.cleaned_data["password"])
-            auth_login(request, user)
+            login2(request, user)
             messages.success(request, "Te has registrado exitosamente")
             return redirect('inicio')
     return render(request, 'templates_usuarios/crear_usuario.html', data)
