@@ -1,3 +1,4 @@
+from django.urls import reverse
 from email import message
 from re import template
 from django.shortcuts import redirect, render
@@ -6,6 +7,7 @@ from usuarios.form_usuarios import UsuarioForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login as auth_login
 from django.contrib import messages
+from django.contrib.auth import authenticate
 
 
 
@@ -17,18 +19,23 @@ def inicio(request):
     template_name = 'inicio.html'
     return render(request, template_name, {})
 
-def login(request, LoginRequiredMixin): 
-    data = {
+def login(request): 
+        data = {
         'form' : UsuarioForm
-    }
-    if request.method == 'POST':
-        password = request.POST.get("password", None)
-        usuario = request.POST.get("username", None)
-        user = authenticate(password,usuario)
-        auth_login(request,user, data)
+        }
+        if request.method == 'POST':
+            password = request.POST["password", None]
+            usuario = request.POST["username", None]
+            user = authenticate(request, username=usuario, password=password)
+            if user is not None:
+                auth_login(request,user, data)
 
-    template_name = 'accounts/login.html'
-    return render(request, template_name, data)
+        template_name = 'accounts/login.html'
+        return render(request, template_name, data)
+
+def get_success_url(self, **kwargs):
+        return reverse('inicio')
+
 
 def registrarse(request):
     data = {
