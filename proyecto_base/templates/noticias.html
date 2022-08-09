@@ -11,42 +11,39 @@
     </div>
   </div>
 
-
+{% for p in post %}
 <div class="card-group">
   <div class="card">
-    <img src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/480/public/media/image/2019/03/lenguajes_programacion_odiados_amados_2019.jpg?itok=N85E5HTT" class="card-img-top" alt="...">
+    <img src="{{MEDIA_URL}}{{p.imagen.url}}" width="100" alt="" srcset="">
     <div class="card-body">
-      <h5 class="card-title">Noticia 1</h5>
-      <p class="card-text">Copete Noticia 1</p>
+      <h5 class="card-title">{{ p.titulo_not}}</h5>
+      <p class="card-text">{{ p.excerpt}}</p>
     </div>
     <div class="card-footer">
-      <small class="text-muted">Fecha 1</small>
+      <small class="text-muted">{{ p.published }}</small>
+    </div>
+    <div= class"container">+
+      <div id="disqus_thread"></div>
+      <script>
+          /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+          /*
+          var disqus_config = function () {
+          this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+          this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+          */
+          (function() { // DON'T EDIT BELOW THIS LINE
+          var d = document, s = d.createElement('script');
+          s.src = 'https://posts-1.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+          })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
   </div>
-  <div class="card">
-    <img src="https://i.blogs.es/b2d165/10481690626_8c28740067_k/500_333.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Noticia 2</h5>
-      <p class="card-text">Copete Noticia 2</p>
-    </div>
-    <div class="card-footer">
-      <small class="text-muted">Fecha 2</small>
-    </div>
-  </div>
-  <div class="card">
-    <img src="http://www.eltiempo.com/files/image_640_428/uploads/2018/05/14/5afa377ebd7af.jpeg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Noticia 3</h5>
-      <p class="card-text">Copete Noticia 3</p>
-    </div>
-    <div class="card-footer">
-      <small class="text-muted">Fecha 3</small>
-    </div>
-  </div>
-</div>
-
-
-
-</main>
-
+   {% endfor %}
+    
 {% endblock contenido %}

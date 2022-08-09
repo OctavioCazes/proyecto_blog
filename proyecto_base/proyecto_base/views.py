@@ -1,19 +1,12 @@
+
 from django.urls import reverse
 from email import message
-from re import template
 from django.shortcuts import redirect, render
-from django.contrib.auth.decorators import login_required
 from usuarios.form_usuarios import UsuarioForm
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login as auth_login
 from django.contrib import messages
 from django.contrib.auth import authenticate
-
-
-
-
-from usuarios.models import Usuario
-
+from blog.models import Post
 
 def inicio(request):
     template_name = 'inicio.html'
@@ -44,16 +37,18 @@ def registrarse(request):
     if request.method == 'POST':
         formulario = UsuarioForm(data=request.POST)
         if formulario.is_valid():
-            formulario.save()
-            user = authenticate(username = formulario.cleaned_data["username"], password = formulario.cleaned_data["password"])
+            user = formulario.save()
             auth_login(request, user)
-            messages.success(request, "Te has registrado exitosamente")
+            messages.success(request,"Te has registrado exitosamente")
             return redirect('inicio')
     return render(request, 'templates_usuarios/crear_usuario.html', data)
 
 def noticias(request):
+    post ={
+        'post':Post.postobjects.all()
+    } 
     template_name = 'noticias.html'
-    return render(request, template_name)
+    return render(request, template_name, post)
 
 def quienes(request):
     template_name = 'quienes.html'
