@@ -12,16 +12,16 @@
   </div>
 
 {% for p in post %}
-<div class="card-group">
-  <div class="card">
-    <img src="{{MEDIA_URL}}{{p.imagen.url}}" width="100" alt="" srcset="">
-    <div class="card-body">
-      <h5 class="card-title">{{ p.titulo_not}}</h5>
-      <p class="card-text">{{ p.excerpt}}</p>
+  <div class="card-group">
+    <div class="card">
+      <img src="{{MEDIA_URL}}{{p.imagen.url}}" width="100" alt="" srcset="">
+      <div class="card-body">
+        <h5 class="card-title">{{ p.titulo_not}}</h5>
+        <p class="card-text">{{ p.excerpt}}</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">{{ p.published }}</small>
+      </div>
     </div>
-    <div class="card-footer">
-      <small class="text-muted">{{ p.published }}</small>
-    </div>
-  </div>
-  {% endfor %}
+{% endfor %}
 {% endblock contenido %}
