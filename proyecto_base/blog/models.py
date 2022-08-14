@@ -4,6 +4,7 @@ from random import choices
 from django.db import models
 from django.utils import timezone
 
+
 class Categorias(models.Model):
     name = models.CharField(max_length=100)
 
@@ -22,8 +23,8 @@ class Post(models.Model):
     )
     
     # vinculamos el modelo, cuando borramos categorias, pretejemos, 
-    catergoria = models.ForeignKey(Categorias, on_delete=models.PROTECT, default=1)
-    imagen = models.ImageField(upload_to='imagenes/', verbose_name='Imagen', null=True)
+    categoria = models.ForeignKey(Categorias, on_delete=models.PROTECT, default=1)
+    imagen = models.ImageField(upload_to="imagenes", verbose_name="imagen", null=True, blank=True)
     titulo_not = models.CharField(max_length=255)
     #breve descripcion del articulo
     excerpt = models.TextField(null=True)
@@ -61,3 +62,4 @@ class Comentario(models.Model):
 
     def _str_(self):
         return f"Comentado por {self.name}"
+
