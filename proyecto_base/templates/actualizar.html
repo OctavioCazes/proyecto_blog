@@ -5,7 +5,7 @@
     <form method="POST">{% csrf_token %}
         
         {% include 'includes/error_forms.html' %}
-        {{form.as_p}}   
+        {% include 'includes/forms.html' %}
 
         <button type="submit" class="btn btn-success">Actualizar</button>
 

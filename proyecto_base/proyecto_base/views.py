@@ -9,7 +9,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from blog.models import Post
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from blog.forms import PostForm
 from core.mixins import SuperUserRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -94,25 +94,31 @@ class CrearNoticias(LoginRequiredMixin, CreateView):
 #    template_name = 'crear.html'
 #    return render(request, template_name)
 
-#class Actualizar(UpdateView):
-#    template_name="actualizar.html"
-#    model=Post
-#    form_class = PostForm
+class Actualizar(UpdateView):
+    template_name="actualizar.html"
+    model=Post
+    form_class = PostForm
 
-#    def get_success_url(self, **kwargs):
-#
+    def get_success_url(self, **kwargs):
+        return reverse ('noticias') 
 
-@login_required
+class Eliminar(DeleteView):
+    model=Post
+    def get_success_url(self, **kwargs):
+        return reverse ('inicio') 
+    template_name = "eliminar.html"
+
+""" @login_required
 def editar(request,id):
     post = Post.postobjects.get(id=id)
     formulario = PostForm(request.POST or None, request.FILES or None, instance=post)
     if formulario.is_valid() and request.POST:
         formulario.save()
         return redirect('noticias')
-    return render(request, 'actualizar.html', {'formulario':formulario})
+    return render(request, 'actualizar.html', {'formulario':formulario}) """
 
-@login_required
+""" @login_required
 def eliminar(request, id):
     post = Post.postobjects.get(id=id)
     post.delete()
-    return redirect('noticias')
+    return redirect('noticias') """

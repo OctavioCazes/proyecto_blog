@@ -123,7 +123,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-MEDIA_ROOT = os.path.join(BASE_DIR, '')
+MEDIA_ROOT =  '/imagenes/'
 MEDIA_URL = '/imagenes/'
 
 # Static files (CSS, JavaScript, Images)
