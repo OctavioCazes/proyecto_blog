@@ -1,0 +1,16 @@
+    <br><br><br><br><br>
+    <h1>Crear Noticias</h1>
+
+    <form method="POST">{% csrf_token %}
+        
+        {% include 'includes/error_forms.html' %}
+        {{form.as_p}}   
+
+          {% if form.field.widget.input_type == 'file' and campo.value %}
+          <img src="{{MEDIA_URL}}/imagenes/{{campo.value}}" width="100" alt="" srcset="">
+          {% endif %} 
+            
+
+        <button type="submit" class="btn btn-success">Crear</button>
+
+    </form>

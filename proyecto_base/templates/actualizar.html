@@ -1,0 +1,13 @@
+{% block contenido %}
+    <br><br><br><br><br>
+    <h1>Editar Noticias</h1>
+
+    <form method="POST">{% csrf_token %}
+        
+        {% include 'includes/error_forms.html' %}
+        {{form.as_p}}   
+
+        <button type="submit" class="btn btn-success">Actualizar</button>
+
+    </form>
+{% endblock contenido %}
