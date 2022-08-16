@@ -1,13 +1,11 @@
+from calendar import c
 from io import UnsupportedOperation
 from django import forms
 from .models import Usuario 
 from django.contrib.auth.forms import UserCreationForm
 
-class UsuarioForm(forms.ModelForm):
+class UsuarioForm(UserCreationForm):
     class Meta:
         model = Usuario
-        fields = 'username', 'password'
-
-
-class CreacionUsuario(UserCreationForm):
-    pass
+        fields = ["first_name" , "last_name", "username", "password1", "password2"]
+       

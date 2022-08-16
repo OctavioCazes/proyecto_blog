@@ -124,7 +124,7 @@ USE_I18N = True
 USE_TZ = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '')
-MEDIA_URL = '/imagenes/'
+MEDIA_URL = '/imagenes/'    
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

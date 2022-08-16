@@ -1,28 +1,33 @@
 
-from re import template
+from django.urls import reverse
+from email import message
 from django.shortcuts import redirect, render
-from django.contrib.auth.decorators import login_required
 from usuarios.form_usuarios import UsuarioForm
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login as auth_login
 from django.contrib import messages
 from django.contrib.auth import authenticate
-from usuarios.models import Usuario
 from blog.models import Post
-
 
 def inicio(request):
     template_name = 'inicio.html'
     return render(request, template_name, {})
 
-def login(request): 
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        auth_login(request, user, backend=None)
-    template_name = 'accounts/login.html'
-    return render(request, template_name)
+def login(request):
+    template_name = 'accounts/login.html' 
+    data = {
+    'form' : UsuarioForm
+    }
+    if request.method == 'POST':
+        password = request.POST["password", None]
+        usuario = request.POST["username", None]
+        user = authenticate(request, username=usuario, password1=password)
+        if user is not None:
+            auth_login(request,user)
+    return render(request, template_name, data)
+
+def get_success_url(self, **kwargs):
+        return reverse('inicio')
+
 
 def registrarse(request):
     data = {
