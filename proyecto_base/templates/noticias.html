@@ -20,10 +20,13 @@
     <div class="card-body">
       <h5 class="card-title">{{ p.titulo_not }}</h5>
       <p class="card-text">{{ p.excerpt }}</p>
+      <p class="card-text">{{ p.contenido_no }}</p>
     </div>
     <div class="card-footer">
       <small class="text-muted">{{ p.published }}</small>
     </div>
+        
+                    
     <a href="{% url 'actualizar' p.slug %}"><button class="w-100 btn btn-lg btn-primary">Actualizar</button></a>
     <a href="{% url 'eliminar' p.slug %}"><button class="w-100 btn btn-lg btn-primary">Eliminar</button></a> 
   </div>

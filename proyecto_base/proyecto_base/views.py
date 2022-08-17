@@ -8,8 +8,9 @@ from usuarios.form_usuarios import UsuarioForm
 from django.contrib.auth import login as auth_login
 from django.contrib import messages
 from django.contrib.auth import authenticate
-from blog.models import Post
+from blog.models import Post, Comentario
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView
 from blog.forms import PostForm
 from core.mixins import SuperUserRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -52,8 +53,8 @@ def registrarse(request):
 
 def noticias(request):
     post ={
-        'post':Post.postobjects.all()
-    } 
+        'post':Post.postobjects.all(),
+        } 
     template_name = 'noticias.html'
     return render(request, template_name, post)
 
@@ -81,7 +82,23 @@ def recursos(request):
     template_name = 'recursos.html'
     return render(request, template_name)
 
-class CrearNoticias(LoginRequiredMixin, CreateView):
+def create_comment(request, id):
+    post = Post.objects.get(id=id)
+    if request.method == "POST":
+        comment = Comment(
+            content=request.POST["comment"],
+            author_id=request.user.pk
+        )
+        #comment = Comment.objects.create_comment(content)
+        comment.save()
+
+
+        return redirect("/posts")
+    
+    return render(request, 'posts/comment.html', {'post': post})
+
+
+class CrearNoticias(SuperUserRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = 'crear.html'
@@ -94,7 +111,7 @@ class CrearNoticias(LoginRequiredMixin, CreateView):
 #    template_name = 'crear.html'
 #    return render(request, template_name)
 
-class Actualizar(UpdateView):
+class Actualizar(SuperUserRequiredMixin, UpdateView):
     template_name="actualizar.html"
     model=Post
     form_class = PostForm
@@ -102,11 +119,19 @@ class Actualizar(UpdateView):
     def get_success_url(self, **kwargs):
         return reverse ('noticias') 
 
-class Eliminar(DeleteView):
+class Eliminar(SuperUserRequiredMixin, DeleteView):
     model=Post
     def get_success_url(self, **kwargs):
         return reverse ('inicio') 
     template_name = "eliminar.html"
+
+
+"""class PostComentario(DetailView):
+    model = Comentario
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["comentarios"] = Comentario.objects.all()
+        return context"""
 
 """ @login_required
 def editar(request,id):
