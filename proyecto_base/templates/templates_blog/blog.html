@@ -2,40 +2,43 @@
 
 {% block contenido %}
     {% for p in posts%}
-<main class="container">
-  <div class="p-4 p-md-5 mb-4 rounded text-bg-primary">
-    <div class="col-md-6 px-0">
-      <h1 class="display-4 fst-italic">{{p.titulo_not}}</h1>
+      
+      {% if p.id == id %}
+        
 
-      </p>
-    </div>
-  </div>
+        
+          <main class="container">
+            <div class="p-4 p-md-5 mb-4 rounded text-bg-primary">
+              <div class="col-md-6 px-0">
+                <h1 class="display-4 fst-italic">{{p.titulo_not}}</h1>
 
-  <div class="card mb-3" >
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="{{MEDIA_URL}}{{p.imagen.url}}" class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title"></h5>
-          <p class="card-text">
-            {{p.excerpt}}
-                
+                </p>
+              </div>
+            </div>
 
-
-
-
-          
-          </p>
-          
-        </div>
-      </div>
+            <div class="card mb-3" >
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="{{p.imagenes.url}}" width="100" alt="" srcset="">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">
+                      {{p.excerpt}}
+                    </p>
+                    <p class="card-text">
+                      {{p.contenido_no}}
+                    </p>
+                    
+                  </div>
+                </div>
+      {% endif %}
     {% endfor %}</div>
-  </div>
+    </div>
 
-  <div>
+    <div>
 
-    
-  </div>
+      
+    </div>
   {% endblock contenido %}

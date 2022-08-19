@@ -25,6 +25,7 @@
     <div class="card-footer">
       <small class="text-muted">{{ p.published }}</small>
     </div>
+    <a href="{% url 'blog:blog' p.id %}"> Ver </a>
     
     {% if user.is_superuser %}  
       <a href="{% url 'blog:actualizar' p.slug %}"><button class="w-100 btn btn-lg btn-primary">Actualizar</button></a>
