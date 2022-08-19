@@ -8,8 +8,9 @@ from usuarios.form_usuarios import UsuarioForm
 from django.contrib.auth import login as auth_login
 from django.contrib import messages
 from django.contrib.auth import authenticate
-from blog.models import Post
+from blog.models import Post, Comentario
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView
 from blog.forms import PostForm
 from core.mixins import SuperUserRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -51,8 +52,8 @@ def registrarse(request):
 
 def noticias(request):
     post ={
-        'post':Post.postobjects.all()
-    } 
+        'post':Post.postobjects.all(),
+        } 
     template_name = 'noticias.html'
     return render(request, template_name, post)
 
