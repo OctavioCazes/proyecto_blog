@@ -10,25 +10,28 @@
       </p>
     </div>
   </div>
-
-<a href="{% url 'crear' %}"><button class="w-100 btn btn-lg btn-primary">Crear Noticias</button></a>  
-
-{% for p in post %}
-    <div class="card-group">
-      <div class="card">
-        <img src="{{p.imagenes.url}}" width="100" alt="" srcset="">
-      <div class="card-body">
-          <h5 class="card-title">{{ p.titulo_not }}</h5>
-          <p class="card-text">{{ p.excerpt }}</p>
-      </div>
-        <div class="card-footer">
-          <small class="text-muted">{{ p.published }}</small>
-      </div>
+  {% if user.is_superuser %} 
+    <a href="{% url 'blog:crear' %}"><button class="w-100 btn btn-lg btn-primary">Crear Noticias</button></a>  
+  {% endif %}
+  {% for p in post %}
+<div class="card-group">
+  <div class="card">
+    <img src="{{p.imagenes.url}}" width="100" alt="" srcset="">
+    <div class="card-body">
+      <h5 class="card-title">{{ p.titulo_not }}</h5>
+      <p class="card-text">{{ p.excerpt }}</p>
     </div>
-    <a href="{% url 'actualizar' p.id %}"><button class="w-100 btn btn-lg btn-primary">Actualizar</button></a>
-    <a href="{% url 'eliminar' p.id %}"><button class="w-100 btn btn-lg btn-primary">Eliminar</button></a> 
+    <div class="card-footer">
+      <small class="text-muted">{{ p.published }}</small>
+    </div>
+    
+    {% if user.is_superuser %}  
+      <a href="{% url 'blog:actualizar' p.slug %}"><button class="w-100 btn btn-lg btn-primary">Actualizar</button></a>
+      <a href="{% url 'blog:eliminar' p.slug %}"><button class="w-100 btn btn-lg btn-primary">Eliminar</button></a>
+    {% endif %}
+  </div>
+  
 {% endfor %}
 
-   
-    
+ 
 {% endblock contenido %}

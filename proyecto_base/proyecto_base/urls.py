@@ -19,16 +19,12 @@ from . import views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import CrearNoticias
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.inicio, name='inicio'),
     path('account/login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path('cerrar-sesion', auth_views.logout_then_login, name="logout" ),
-    path('crear', CrearNoticias.as_view(), name='crear'),
-    path('actualizar/<int:id>/', views.editar, name='actualizar'),
-    path('eliminar/<int:id>/', views.eliminar, name='eliminar'),
     path('registrarse', views.registrarse, name='registrarse'),
     path('noticias/', views.noticias, name='noticias'),
     path('quienes/', views.quienes, name='quienes'),

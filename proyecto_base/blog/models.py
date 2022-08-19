@@ -1,3 +1,4 @@
+from distutils.command.install_egg_info import to_filename
 from django.contrib.auth.models import User
 from email.policy import default
 from random import choices
@@ -24,7 +25,7 @@ class Post(models.Model):
     
     # vinculamos el modelo, cuando borramos categorias, pretejemos, 
     categoria = models.ForeignKey(Categorias, on_delete=models.PROTECT, default=1)
-    imagen = models.ImageField(upload_to="imagenes", verbose_name="imagen", null=True, blank=True)
+    imagenes = models.ImageField(upload_to="imagenes", null=True, blank=True)
     titulo_not = models.CharField(max_length=255)
     #breve descripcion del articulo
     excerpt = models.TextField(null=True)

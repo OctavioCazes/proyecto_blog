@@ -8,7 +8,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ["categoria", "titulo_not", "imagen", "excerpt", "contenido_no", "slug", "published", "estado"]
+        fields = ["categoria", "titulo_not", "imagenes", "excerpt", "contenido_no", "slug", "published", "estado"]
 
     """def clean_nombre(self):
         nombre = self.cleaned_data["nombre"]
