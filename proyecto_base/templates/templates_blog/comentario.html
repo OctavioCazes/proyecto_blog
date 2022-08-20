@@ -1,0 +1,10 @@
+<br><br><br><br><br>
+<h1>Comentar</h1>
+
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+    
+    {% include 'includes/error_forms.html' %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-success">Crear</button>
+
+</form>

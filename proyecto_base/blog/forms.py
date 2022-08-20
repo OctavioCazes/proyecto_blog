@@ -1,6 +1,6 @@
 from dataclasses import fields
 from django import forms 
-from blog.models import Post
+from blog.models import Post, Comentario
 
 class PostForm(forms.ModelForm):
     # nombre=forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
@@ -15,3 +15,9 @@ class PostForm(forms.ModelForm):
         if nombre[0] != "A":
             raise forms.ValidationError("El nombre del equipo debe iniciar con la letra A")
         return nombre"""
+
+class ComentarioForm(forms.ModelForm):
+
+    class Meta:
+        model = Comentario
+        fields = '__all__'

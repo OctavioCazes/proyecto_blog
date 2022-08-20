@@ -13,23 +13,22 @@
   {% if user.is_superuser %} 
     <a href="{% url 'blog:crear' %}"><button class="w-100 btn btn-lg btn-primary">Crear Noticias</button></a>  
   {% endif %}
-  {% for p in post %}
-<div class="card-group">
-  <div class="card">
-    <img src="{{p.imagenes.url}}" width="100" alt="" srcset="">
-    <div class="card-body">
-      <h5 class="card-title">{{ p.titulo_not }}</h5>
-      <p class="card-text">{{ p.excerpt }}</p>
-      <p class="card-text">{{ p.contenido_no }}</p>
+{% for p in post %}
+    <div class="col">
+      <div class="card">
+        <img src="{{p.imagenes.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{p.titulo_not}}</h5>
+          <p class="card-text">{{p.excerpt}}</p>
+          <p class="card-text"><small class="text-muted">{{p.published}}</small></p>
+        </div>
+      </div>
     </div>
-    <div class="card-footer">
-      <small class="text-muted">{{ p.published }}</small>
-    </div>
-    <a href="{% url 'blog:blog' p.id %}"> Ver </a>
+      <a href="{% url 'blog:blog' p.id %}"> Ver </a>
     
     {% if user.is_superuser %}  
-      <a href="{% url 'blog:actualizar' p.slug %}"><button class="w-100 btn btn-lg btn-primary">Actualizar</button></a>
-      <a href="{% url 'blog:eliminar' p.slug %}"><button class="w-100 btn btn-lg btn-primary">Eliminar</button></a>
+      <a href="{% url 'blog:actualizar' p.id %}"><button class="w-100 btn btn-lg btn-primary">Actualizar</button></a>
+      <a href="{% url 'blog:eliminar' p.id %}"><button class="w-100 btn btn-lg btn-danger">Eliminar</button></a>
     {% endif %}
   </div>
   

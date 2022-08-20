@@ -16,29 +16,31 @@
               </div>
             </div>
 
-            <div class="card mb-3" >
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img src="{{p.imagenes.url}}" width="100" alt="" srcset="">
+            <div class="col">
+              <div class="card">
+                <img src="{{p.imagenes.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{p.excerpt}}</h5>
+                  <p class="card-text">{{p.contenido_no}}</p>
+                  <p class="card-text"><small class="text-muted">{{p.published}}{{p.author}}</small></p>
                 </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title"></h5>
-                    <p class="card-text">
-                      {{p.excerpt}}
-                    </p>
-                    <p class="card-text">
-                      {{p.contenido_no}}
-                    </p>
-                    
-                  </div>
-                </div>
+              </div>
+            </div>
       {% endif %}
     {% endfor %}</div>
     </div>
-
     <div>
+     
 
+      {% for c in comentario  %}
+          
+
+            {% if c.post_id == id %}      
+                <p class="card-text">{{c.content}}</p>
+                <h3> {{c.name}}</h3>
+            {% endif %}
+      {% endfor %}
+      <a href="{% url 'blog:comentar' %}"> Comentar </a>
       
     </div>
   {% endblock contenido %}

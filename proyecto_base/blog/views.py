@@ -1,19 +1,30 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import TemplateView
-from .models import Post
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import ComentarioForm
+from .models import Comentario, Post
 from core.mixins import SuperUserRequiredMixin
 from usuarios.form_usuarios import UsuarioForm
 from django.urls import reverse
 from blog.forms import PostForm
 
 # Create your views here.
+class ComentarioView(LoginRequiredMixin ,CreateView):
+    template_name = 'templates_blog/comentario.html'
+    model = Comentario
+    form_class = ComentarioForm
+    
+    def get_success_url(self, **kwargs):
+        return reverse('inicio')
+
 class BlogView(TemplateView):
     template_name='templates_blog/blog.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["posts"] = Post.postobjects.all()
+        context["comentario"] = Comentario.objects.all()
         return context
 
 class CrearNoticias(SuperUserRequiredMixin, CreateView):
