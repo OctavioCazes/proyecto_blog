@@ -16,6 +16,7 @@ from core.mixins import SuperUserRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+
 def inicio(request):
     template_name = 'inicio.html'
     return render(request, template_name, {})

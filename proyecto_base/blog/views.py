@@ -3,13 +3,22 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ComentarioForm
+from .filters import CategoriasFilter
 from .models import Comentario, Post
 from core.mixins import SuperUserRequiredMixin
 from usuarios.form_usuarios import UsuarioForm
 from django.urls import reverse
 from blog.forms import PostForm
+#import django_filters
+
 
 # Create your views here.
+
+def categoria_list(request):
+   f = CategoriasFilter(request.GET, queryset=Post.postobjects.all())
+   return render(request, 'templates_blog/filter.html', {'filter': f})
+
+
 class ComentarioView(LoginRequiredMixin ,CreateView):
     template_name = 'templates_blog/comentario.html'
     model = Comentario

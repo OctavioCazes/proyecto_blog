@@ -4,6 +4,7 @@ from email.policy import default
 from random import choices
 from django.db import models
 from django.utils import timezone
+import django_filters
 
 
 class Categorias(models.Model):
@@ -63,4 +64,7 @@ class Comentario(models.Model):
 
     def _str_(self):
         return f"Comentado por {self.name}"
+
+
+
 
