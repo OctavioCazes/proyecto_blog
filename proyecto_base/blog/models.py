@@ -7,6 +7,7 @@ from django.utils import timezone
 import django_filters
 
 
+
 class Categorias(models.Model):
     name = models.CharField(max_length=100)
 
