@@ -1,10 +1,22 @@
-    <br><br><br><br><br>
-    <h1>Crear Noticias</h1>
+   
+   {% extends "base.html" %}
 
-    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+   {% block contenido %}
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 rounded text-bg-primary">
+    <h1>Crear una noticia</h1>
+    </div>
+    <div class="card">
+    <form method="POST" enctype="multipart/form-data" class="form-control">{% csrf_token %}
         
         {% include 'includes/error_forms.html' %}
         {{form.as_p}}
+        <center>
         <button type="submit" class="btn btn-success">Crear</button>
+        </center>
 
     </form>
+</div>
+    
+</main>
+    {% endblock contenido %}
