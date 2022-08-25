@@ -1,13 +1,17 @@
-{% block contenido %}
-    <br><br><br><br><br>
-    <h1>Editar Noticias</h1>
+{% extends "base.html" %}
 
-    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+{% block contenido %}
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 rounded text-bg-primary">  
+    <h1>Editar Noticia</h1>
+</div>
+<div class="card">
+    <form method="POST" enctype="multipart/form-data" class="form-control">{% csrf_token %}
         
         {% include 'includes/error_forms.html' %}
         {% include 'includes/forms.html' %}
 
-        <button type="submit" class="btn btn-success">Actualizar</button>
+        <center><button type="submit" class="btn btn-success">Guardar cambios</button></center>
 
     </form>
 {% endblock contenido %}

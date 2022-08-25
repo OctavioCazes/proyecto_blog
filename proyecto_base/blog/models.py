@@ -7,6 +7,7 @@ from django.utils import timezone
 import django_filters
 
 
+
 class Categorias(models.Model):
     name = models.CharField(max_length=100)
 
@@ -17,7 +18,7 @@ class Post(models.Model):
     #Clase dentro de otra clase,vamos a usar para buscar y mostrar los articulos en pantalla publicados
     class PostObjects(models.Manager):
         def get_queryser(self):
-            return super().get_queryset().filter(estado='published')
+            return super().get_queryset().filter(estado='published', categoria = '1')
     
     options = (
         ('draft', 'Draft'),

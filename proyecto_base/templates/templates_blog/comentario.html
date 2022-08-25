@@ -1,16 +1,19 @@
-<br><br><br><br><br>
-<h1></h1>
+{% extends "base.html" %}
+
+{% block contenido %}
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 rounded text-bg-primary">
+    <h1>Comentar</h1>
+    </div>
+<div class="card">
+    <h1>Crear un comentario</h1>
 
 <form method="POST" enctype="multipart/form-data">{% csrf_token %}
     
     {% include 'includes/error_forms.html' %}
-{% for field in form %}
-    <div class="form-group">
-        <label for="">{{field.label}}</label>
-        {{field}}
-    </div>
-    
-{% endfor %}
-    <button type="submit" class="btn btn-success">Crear</button>
+    {{form.as_p}}
+    <center><button type="submit" class="btn btn-success">Crear</button></center>
 
 </form>
+</div>
+{% endblock contenido %}

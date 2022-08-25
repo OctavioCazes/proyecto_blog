@@ -1,12 +1,21 @@
-<form method="post">{% csrf_token %}
+
+      {% extends "base.html" %}
+
+   {% block contenido %}
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 rounded text-bg-primary">
+    <h1>Eliminar Noticia</h1>
+    </div>
+    <div class="card">
+        
+        <form method="post">{% csrf_token %}
      
  
- 
- 
-    <p>No te vas a arrependir al borrar, ¿no? "{{ object }}"?</p>
+    <p>¿Está seguro que desea eliminar la noticia: "{{ object }}"?</p>
      
-     
-     
-     
-        <input type="submit" value="Confirm">
+        
+    
+        <center><input type="submit" value="Confirmar" class="btn btn-danger"> </center>  
     </form>
+    </div>
+    {% endblock contenido %}

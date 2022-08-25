@@ -15,32 +15,39 @@
                 </p>
               </div>
             </div>
-
+            
             <div class="col">
               <div class="card">
                 <img src="{{p.imagenes.url}}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">{{p.excerpt}}</h5>
                   <p class="card-text">{{p.contenido_no}}</p>
-                  <p class="card-text"><small class="text-muted">{{p.published}}{{p.author}}</small></p>
+                  <p class="card-text"><small class="text-muted">{{p.published}}</small></p>
                 </div>
               </div>
             </div>
       {% endif %}
     {% endfor %}</div>
     </div>
+    <br>
+    <h2>Comentarios:</h2>
+
     <div>
      
-
       {% for c in comentario  %}
           
-
-            {% if c.post_id == id %}      
+            {% if c.post_id == id %}
+            <br>     
+            <div class="card">
+                <h4 class="card-title"> {{c.name}}</h4>
+                <p class="text-muted"><small> {{c.publish}}</small></p>   
                 <p class="card-text">{{c.content}}</p>
-                <h3> {{c.name}}</h3>
+                
+              </div>
             {% endif %}
       {% endfor %}
-      <a href="{% url 'blog:comentar' id %}"> Comentar </a>
+      <br>
+      <a class="btn btn-sm btn-outline-secondary" href="{% url 'blog:comentar' id%}"> Comentar </a>
       
     </div>
   {% endblock contenido %}
