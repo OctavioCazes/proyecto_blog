@@ -15,24 +15,32 @@
     {% if user.is_superuser %} 
       <a href="{% url 'blog:crear' %}"><button class="btn btn-success" type="button">Crear noticia</button></a> 
     {% endif %}
-    <button class="btn btn-primary" type="button">Buscar/Filtrar</button> 
+    <button class="btn btn-primary" type="button">Buscar/Filtrar</button>
+    <a href="{% url 'inicio' %}"><button class="btn btn-primary" type="button">Volver</button></a>  
   </p>
   </div>
   </div>
   <br>
    
   <form method="get">
-      {{ filtro.form.as_p }}
+      {{ filtro.form }}
       <input type="submit" />
   </form>
-      {% for obj in filtro.qs %}
-          {{ obj.categoria }} - ${{ obj.published }}
-      {% endfor %}
-
+    {% for f in filtro.qs  %}
+    <div>
+      {% include 'templates_blog/filter.html'%}
+    {{f}}
+    </div>
+    {% endfor %}
+  
+    
    <center>
   <p>
   {% for p in post %}
     
+
+
+      
       
       <div class="card" style="width: 35rem;">
         
@@ -56,10 +64,12 @@
       </p>
       
       </div>
+
     
   
     <br>
 {% endfor %}
+
   </p>
 </center>
 {% endblock contenido %}

@@ -15,8 +15,12 @@ from blog.forms import PostForm
 # Create your views here.
 
 def categoria_list(request):
-   f = CategoriasFilter(request.GET, queryset=Post.postobjects.all())
-   return render(request, 'templates_blog/filter.html', {'filter': f})
+
+	ctx ={
+		'post':Post.postobjects.all(),
+		'filtro': CategoriasFilter(request.GET, queryset=Post.postobjects.all())
+	}
+	return render(request, 'templates_blog/filter.html', {ctx})
 
 
 class ComentarioView(LoginRequiredMixin ,CreateView):

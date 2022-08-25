@@ -1,10 +1,38 @@
+    
+  <center>
+ <p>
 
-<br><br><br>
-<form method="get">
-    {{ filter.form.as_p }}
-    <input type="submit" />
-</form>
-    {% for obj in filter.qs %}
-        {{ obj.categoria }} - ${{ obj.published }}<br />
-    {% endfor %}
+{% for f in filtro.qs %}
+    
 
+    
+    {% if f == post.categoria or f == post.published %}
+    
+        {% for p in post %}
+    
+        
+        <div class="card" style="width: 35rem;">
+        
+        <h5 class="card-title text-start">{{p.titulo_not}}</h5>
+        
+        <div class="card-body">
+            <img src="{{p.imagenes.url}}" class="card-img-top" alt="...">
+            <p class="card-text text-start">{{p.excerpt}}</p>
+            <p class="card-text text-start"><small class="text-muted">{{p.published}}</small></p>
+        </div>
+        
+        <p class="text-end">
+            <a href="{% url 'blog:blog' p.id %}"><button class=" btn btn-lg btn-primary">Leer</button></a> 
+            
+        {% if user.is_superuser %}
+            
+            <a href="{% url 'blog:actualizar' p.id %}"><button class=" btn btn-lg btn-warning">Editar</button></a>
+            
+            <a href="{% url 'blog:eliminar' p.id %}"><button class=" btn btn-lg btn-danger">Eliminar</button></a>
+        {% endif %}
+        </p>
+        
+        </div>
+        {% endfor %}
+    {% endif %} 
+{% endfor %}
