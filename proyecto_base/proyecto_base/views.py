@@ -15,6 +15,7 @@ from blog.forms import PostForm
 from core.mixins import SuperUserRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from blog.filters import CategoriasFilter
 
 
 def inicio(request):
@@ -54,6 +55,7 @@ def registrarse(request):
 def noticias(request):
     post ={
         'post':Post.postobjects.all(),
+        'filtro': CategoriasFilter(request.GET, queryset=Post.postobjects.all())
         } 
     template_name = 'noticias.html'
     return render(request, template_name, post)

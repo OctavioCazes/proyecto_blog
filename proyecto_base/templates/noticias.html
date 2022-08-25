@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block contenido %}
-{% include 'templates_blog/filter.html' %}
 <main class="container">
   <div class="p-4 p-md-5 mb-4 rounded text-bg-primary">
     <div class="col-md-6 px-0">
@@ -13,6 +12,15 @@
   {% if user.is_superuser %} 
     <a href="{% url 'blog:crear' %}"><button class="w-100 btn btn-lg btn-primary">Crear Noticias</button></a>  
   {% endif %}
+
+<form method="get">
+    {{ filtro.form.as_p }}
+    <input type="submit" />
+</form>
+    {% for obj in filtro.qs %}
+        {{ obj.categoria }} - ${{ obj.published }}<br />
+    {% endfor %}
+
 {% for p in post %}
     <div class="col">
       <div class="card">

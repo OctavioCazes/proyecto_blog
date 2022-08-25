@@ -1,10 +1,16 @@
 <br><br><br><br><br>
-<h1>Comentar</h1>
+<h1></h1>
 
 <form method="POST" enctype="multipart/form-data">{% csrf_token %}
     
     {% include 'includes/error_forms.html' %}
-    {{form.as_p}}
+{% for field in form %}
+    <div class="form-group">
+        <label for="">{{field.label}}</label>
+        {{field}}
+    </div>
+    
+{% endfor %}
     <button type="submit" class="btn btn-success">Crear</button>
 
 </form>

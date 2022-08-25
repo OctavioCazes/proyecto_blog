@@ -20,42 +20,53 @@ def categoria_list(request):
 
 
 class ComentarioView(LoginRequiredMixin ,CreateView):
-    template_name = 'templates_blog/comentario.html'
-    model = Comentario
-    form_class = ComentarioForm
-    
-    def get_success_url(self, **kwargs):
-        return reverse('inicio')
+	template_name = 'templates_blog/comentario.html'
+	model = Comentario
+	form_class = ComentarioForm
+
+	def form_valid(self, form):
+		f = form.save(commit=False)
+		f.name = self.request.user
+		return super(ComentarioView, self).form_valid(form)
+	
+	"""def get_form_kwargs(self):
+		kwargs = super(ComentarioView, self).get_form_kwargs()
+		kwargs["post"]=self.request.post_id
+		return kwargs"""
+
+	
+	def get_success_url(self, **kwargs):
+		return reverse('noticias')
 
 class BlogView(TemplateView):
-    template_name='templates_blog/blog.html'
+	template_name='templates_blog/blog.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = Post.postobjects.all()
-        context["comentario"] = Comentario.objects.all()
-        return context
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context["posts"] = Post.postobjects.all()
+		context["comentario"] = Comentario.objects.all()
+		return context
 
 class CrearNoticias(SuperUserRequiredMixin, CreateView):
-    model = Post
-    form_class = PostForm
-    template_name = 'templates_blog/crear.html'
-    
-    def get_success_url(self, **kwargs):
-        return reverse('inicio')
+	model = Post
+	form_class = PostForm
+	template_name = 'templates_blog/crear.html'
+	
+	def get_success_url(self, **kwargs):
+		return reverse('inicio')
 
 class Actualizar(SuperUserRequiredMixin, UpdateView):
-    template_name="templates_blog/actualizar.html"
-    model=Post
-    form_class = PostForm
+	template_name="templates_blog/actualizar.html"
+	model=Post
+	form_class = PostForm
 
-    def get_success_url(self, **kwargs):
-        return reverse ('noticias') 
+	def get_success_url(self, **kwargs):
+		return reverse ('noticias') 
 
 class Eliminar(SuperUserRequiredMixin ,DeleteView):
-    model=Post
-    def get_success_url(self, **kwargs):
-        return reverse ('inicio') 
-    template_name = "templates_blog/eliminar.html"
+	model=Post
+	def get_success_url(self, **kwargs):
+		return reverse ('inicio') 
+	template_name = "templates_blog/eliminar.html"
 
    
