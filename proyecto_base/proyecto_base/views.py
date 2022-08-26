@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate
 from blog.models import Post
 from django.views.generic import TemplateView, ListView
 from blog.filters import CategoriasFilter
+from django.core.paginator import Paginator
 
 def inicio(request):
 	template_name = 'inicio.html'
@@ -46,10 +47,18 @@ def registrarse(request):
 def noticias(request):
 	filtro = Post.postobjects.all()
 	filtro_post = CategoriasFilter(request.GET, queryset=filtro)
+	
+
+	paginator = Paginator(filtro, 1)
+	page_number = request.GET.get('page')
+	page_obj = paginator.get_page(page_number)
+	
+
 	post ={
-		'post':Post.postobjects.all(),
+		'post': filtro,
 		'filtro': filtro_post
 		} 
+
 	template_name = 'noticias.html'
 	return render(request, template_name, post)
 
