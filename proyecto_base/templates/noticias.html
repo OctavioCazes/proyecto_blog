@@ -9,67 +9,63 @@
       </p>
     </div>
   </div>
-  <div class="card">
-    <p>
-    <div class="d-grid gap-2 d-md-block text-end">
-    {% if user.is_superuser %} 
-      <a href="{% url 'blog:crear' %}"><button class="btn btn-success" type="button">Crear noticia</button></a> 
-    {% endif %}
-    <button class="btn btn-primary" type="button">Buscar/Filtrar</button>
-    <a href="{% url 'inicio' %}"><button class="btn btn-primary" type="button">Volver</button></a>  
-  </p>
+  <div class="card text-end"> 
+    
+    <div class="blog-header lh-1 py-3">
+      
+      
+      <form class="form" method="get">
+        
+        {{ filtro.form }}
+        <input class="btn btn-info" type="submit" value="Filtrar"/>
+        {% if user.is_superuser %} 
+        <a href="{% url 'blog:crear' %}"><button class="btn btn-success" type="button">Crear noticia</button></a> 
+        {% endif %}
+    
+    <a href="{% url 'inicio' %}"><button class="btn btn-primary" type="button">Inicio</button></a> 
+  </form>
+
+     
   </div>
   </div>
+
   <br>
    
-  <form method="get">
-      {{ filtro.form }}
-      <input type="submit" />
-  </form>
-    {% for f in filtro.qs  %}
-    <div>
-      {% include 'templates_blog/filter.html'%}
-    {{f}}
-    </div>
-    {% endfor %}
   
+  <br>
+<center>
+    {% for f in filtro.qs  %}
     
-   <center>
-  <p>
-  {% for p in post %}
-    
+    <div>
 
-
-      
-      
-      <div class="card" style="width: 35rem;">
+    <div class="card" style="width: 35rem;">
         
-        <h5 class="card-title text-start">{{p.titulo_not}}</h5>
+        <h5 class="card-title text-start">{{f.titulo_not}}</h5>
         
         <div class="card-body">
-          <img src="{{p.imagenes.url}}" class="card-img-top" alt="...">
-          <p class="card-text text-start">{{p.excerpt}}</p>
-          <p class="card-text text-start"><small class="text-muted">{{p.published}}</small></p>
+          <img src="{{f.imagenes.url}}" class="card-img-top" alt="...">
+          <p class="card-text text-start">{{f.excerpt}}</p>
+          <p class="card-text text-start"><small class="text-muted">{{f.published}}</small></p>
         </div>
       
       <p class="text-end">
-          <a href="{% url 'blog:blog' p.id %}"><button class=" btn btn-lg btn-primary">Leer</button></a> 
+          <a href="{% url 'blog:blog' f.id %}"><button class=" btn btn-lg btn-primary">Leer</button></a> 
             
         {% if user.is_superuser %}
            
-          <a href="{% url 'blog:actualizar' p.id %}"><button class=" btn btn-lg btn-warning">Editar</button></a>
+          <a href="{% url 'blog:actualizar' f.id %}"><button class=" btn btn-lg btn-warning">Editar</button></a>
          
-          <a href="{% url 'blog:eliminar' p.id %}"><button class=" btn btn-lg btn-danger">Eliminar</button></a>
+          <a href="{% url 'blog:eliminar' f.id %}"><button class=" btn btn-lg btn-danger">Eliminar</button></a>
         {% endif %}
       </p>
       
       </div>
-
-    
+      
   
-    <br>
-{% endfor %}
-
-  </p>
-</center>
+  </div>
+  <br>
+    {% endfor %}
+  
+    
+  </center> 
 {% endblock contenido %}
