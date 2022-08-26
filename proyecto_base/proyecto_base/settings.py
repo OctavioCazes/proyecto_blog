@@ -84,12 +84,12 @@ WSGI_APPLICATION = 'proyecto_base.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'blog',
-        'USER' : 'postgres',
-        'PASSWORD': 'Postgre40$',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'blog2',
+        'USER' : 'root',
+        'PASSWORD': 'octavio',
         'HOST': 'localhost',
-        'PORT': '5432'
+        'PORT': '3306'
     }
 }
 

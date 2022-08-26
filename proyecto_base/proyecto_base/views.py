@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate
 from blog.models import Post
 from django.views.generic import TemplateView, ListView
 from blog.filters import CategoriasFilter
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def inicio(request):
 	template_name = 'inicio.html'
@@ -45,18 +45,25 @@ def registrarse(request):
 	return render(request, 'templates_usuarios/crear_usuario.html', data)
 
 def noticias(request):
-	filtro = Post.postobjects.all()
-	filtro_post = CategoriasFilter(request.GET, queryset=filtro)
+	post_list = Post.postobjects.all()
+	filtro_post = CategoriasFilter(request.GET, queryset=post_list)
+	page = request.GET.get('page', 1)
+	paginator = Paginator(post_list, 1)
+
+	try:
+		posts = paginator.page(page)
+	except PageNotAnInteger:
+		posts = paginator.page(1)
+	except EmptyPage:
+		posts = paginator.page(paginator.num_pages)
 	
 
-	paginator = Paginator(filtro, 1)
-	page_number = request.GET.get('page')
-	page_obj = paginator.get_page(page_number)
+
 	
 
 	post ={
-		'post': filtro,
-		'filtro': filtro_post
+		'post': posts,
+		'filtro': filtro_post,
 		} 
 
 	template_name = 'noticias.html'

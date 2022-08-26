@@ -6,4 +6,4 @@ class CategoriasFilter(django_filters.FilterSet):
     class Meta:
         model = Post
         #fields = ['published', 'categoria']
-        fields = {'categoria': ['exact'], 'published': ['exact']}
+        fields = {'categoria': ['exact']}
