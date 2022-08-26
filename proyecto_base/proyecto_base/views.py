@@ -47,23 +47,14 @@ def registrarse(request):
 def noticias(request):
 	post_list = Post.postobjects.all()
 	filtro_post = CategoriasFilter(request.GET, queryset=post_list)
-	page = request.GET.get('page', 1)
-	paginator = Paginator(post_list, 1)
-
-	try:
-		posts = paginator.page(page)
-	except PageNotAnInteger:
-		posts = paginator.page(1)
-	except EmptyPage:
-		posts = paginator.page(paginator.num_pages)
+	paginated_filtro = Paginator(filtro_post.qs, 2)
+	page_number = request.GET.get('page')
+	paginated_obj = paginated_filtro.get_page(page_number)
 	
-
-
-	
-
 	post ={
-		'post': posts,
 		'filtro': filtro_post,
+		'post': paginated_obj
+
 		} 
 
 	template_name = 'noticias.html'

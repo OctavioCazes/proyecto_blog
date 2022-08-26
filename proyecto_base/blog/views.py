@@ -17,7 +17,6 @@ from blog.forms import PostForm
 def categoria_list(request):
 
 	ctx ={
-		'post':Post.postobjects.all(),
 		'filtro': CategoriasFilter(request.GET, queryset=Post.postobjects.all())
 	}
 	return render(request, 'templates_blog/filter.html', {ctx})
