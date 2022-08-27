@@ -10,5 +10,4 @@ urlpatterns = [
     path('comentar/<int:id>', ComentarioView.as_view(), name='comentar'),
     path('actualizar/<int:pk>/', Actualizar.as_view(), name='actualizar'),    
     path('eliminar/<int:pk>/', Eliminar.as_view(), name='eliminar'),
-    path('filtro', categoria_list, name = 'filtro')
 ]

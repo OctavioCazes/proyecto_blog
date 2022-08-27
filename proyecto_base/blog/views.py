@@ -1,25 +1,15 @@
-from django.shortcuts import render
+
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ComentarioForm
-from .filters import CategoriasFilter
 from .models import Comentario, Post
 from core.mixins import SuperUserRequiredMixin
-from usuarios.form_usuarios import UsuarioForm
 from django.urls import reverse
 from blog.forms import PostForm
-#import django_filters
 
 
-# Create your views here.
 
-def categoria_list(request):
-
-	ctx ={
-		'filtro': CategoriasFilter(request.GET, queryset=Post.postobjects.all())
-	}
-	return render(request, 'templates_blog/filter.html', {ctx})
 
 
 class ComentarioView(LoginRequiredMixin ,CreateView):
@@ -32,10 +22,6 @@ class ComentarioView(LoginRequiredMixin ,CreateView):
 		f.name = self.request.user
 		return super(ComentarioView, self).form_valid(form)
 	
-	"""def get_form_kwargs(self):
-		kwargs = super(ComentarioView, self).get_form_kwargs()
-		kwargs["post"]=self.request.post_id
-		return kwargs"""
 
 	
 	def get_success_url(self, **kwargs):
@@ -56,7 +42,7 @@ class CrearNoticias(SuperUserRequiredMixin, CreateView):
 	template_name = 'templates_blog/crear.html'
 	
 	def get_success_url(self, **kwargs):
-		return reverse('inicio')
+		return reverse('noticias')
 
 class Actualizar(SuperUserRequiredMixin, UpdateView):
 	template_name="templates_blog/actualizar.html"

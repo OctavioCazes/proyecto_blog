@@ -4,7 +4,6 @@ from email.policy import default
 from random import choices
 from django.db import models
 from django.utils import timezone
-import django_filters
 
 
 
@@ -40,7 +39,6 @@ class Post(models.Model):
     objet = models.Manager()
     postobjects = PostObjects()
 
-    #FALTA crear el tema de colocar fotos
 
     class Meta():
         ordering = ('-published',)
@@ -50,7 +48,7 @@ class Post(models.Model):
 
 
 
-#comentarios como adorno?
+
 class Comentario(models.Model):
 
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
