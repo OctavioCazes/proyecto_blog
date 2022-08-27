@@ -8,7 +8,7 @@ _Proyecto de Creación de Página Web (Blog) realizado por el Grupo Nro 8 de la 
  - Categorizar la noticia.
  - Editar una noticia.
  - Eliminar una noticia.
- **Visitante**
+**Visitante**
  - Registrarse y loguearse.
  - Filtrar noticias por categoria.
  - Comentar noticias.
