@@ -2,13 +2,13 @@
 _Proyecto de Creación de Página Web (Blog) realizado por el Grupo Nro 8 de la 4ta Comisión como parte de un programa del Gobierno del Chaco y la Subsecretaría de Empleo para la formación en el sector de Software y Servicios Informáticos: **INFORMATORIO**_
 
 ## Funcionalidades :fire:
-- **Admin**
+ **Admin**
  - Cargar noticias en la web.
  - Cargar fotos asociadas a las noticias.
  - Categorizar la noticia.
  - Editar una noticia.
  - Eliminar una noticia.
-- **Visitante**
+ **Visitante**
  - Registrarse y loguearse.
  - Filtrar noticias por categoria.
  - Comentar noticias.
@@ -19,7 +19,8 @@ _Proyecto de Creación de Página Web (Blog) realizado por el Grupo Nro 8 de la 
 * [Django]------------------(https://code.visualstudio.com/)
 * [GitHub]------------------(https://github.com/)
 
-## Librerias utilizadas para el funcionamiento :books:
+## Pre-requisitos :wrench:
+### Librerias utilizadas para el funcionamiento :books:
 * [asgiref==3.5.2]
 * [cffi==1.15.1]
 * [cryptography==37.0.4]
@@ -35,7 +36,7 @@ _Proyecto de Creación de Página Web (Blog) realizado por el Grupo Nro 8 de la 
 ##### Aclaración
 _Se debe configurar el archivo settings.py para que funcione de manera local_
 
-## AUTORES :pen:
+## Autores :pen:
 * **Octavio Cazes** 
 * **Fernando Schmidt** 
 * **Juan Carlos Bianchi** 
